@@ -1,0 +1,238 @@
+<!DOCTYPE html><html lang="en"> <head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><meta name="description" content="Documentation for Artefkt: quickstart, file formats, projects, settings, export behavior, shortcuts and troubleshooting."><meta name="theme-color" content="#22222a"><link rel="icon" type="image/svg+xml" href="/logo1.svg"><link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link rel="preload" href="/fonts/LigaSans-Bold.woff2" as="font" type="font/woff2" crossorigin><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap"><script>
+      document.documentElement.classList.add('js', 'is-loading');
+    </script><title>Artefkt Docs | Quickstart, Files and Export</title><link rel="stylesheet" href="/_astro/docs.lD8RKZEt.css">
+<link rel="stylesheet" href="/_astro/docs.CJuq0oEB.css"></head> <body class="font-body docs-flat-bg"> <div class="site-loader" aria-hidden="true"> <img src="/logo1.svg" alt="" width="72" height="72" class="site-loader__mark"> </div> <div class="site-shell">  <header class="nav-fixed"> <div class="mx-auto max-w-[1560px] px-5 lg:px-12 h-[68px] flex items-center justify-between gap-6"> <a href="/" class="flex items-center gap-3 shrink-0" aria-label="Artefkt home"> <img src="/artefkt-logo.svg" alt="Artefkt" class="h-7 w-auto" width="129" height="28"> </a> <nav aria-label="Primary" class="hidden md:flex items-center gap-7 absolute left-1/2 -translate-x-1/2"> <a href="/#features" class="nav-link">Features</a><a href="/effects" class="nav-link">Effects</a><a href="/gallery" class="nav-link">Gallery</a> <a href="/docs" class="nav-link">Docs</a> </nav> <div class="flex items-center gap-3 shrink-0"> <a href="https://z0mb0t.itch.io/artefkt" class="nav-pill nav-pill--solid" target="_blank" rel="noreferrer"> <svg width="14" height="14" viewBox="0 0 256 256" fill="none" stroke="currentColor" stroke-width="20" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m128 24 96 48v112l-96 48-96-48V72l96-48Z"/><path d="M32 72l96 48 96-48"/><path d="M128 120v112"/><path d="m80 48 96 48"/></svg>
+Purchase
+</a> <button type="button" class="hamburger md:hidden" aria-controls="mobile-drawer" aria-expanded="false" aria-label="Toggle menu" id="nav-hamburger"> <span></span> <span></span> <span></span> </button> </div> </div> <div id="mobile-drawer" class="nav-drawer md:hidden" hidden> <ul class="nav-drawer__list"> <li> <a href="/#features" class="nav-drawer__link"> <span> <strong>Features</strong> <small>Workflow, stack and export</small> </span> <svg width="15" height="15" viewBox="0 0 256 256" fill="none" stroke="currentColor" stroke-width="20" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M40 128h176"/><path d="m144 56 72 72-72 72"/></svg> </a> </li><li> <a href="/effects" class="nav-drawer__link"> <span> <strong>Effects</strong> <small>65 stackable modules</small> </span> <svg width="15" height="15" viewBox="0 0 256 256" fill="none" stroke="currentColor" stroke-width="20" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M40 128h176"/><path d="m144 56 72 72-72 72"/></svg> </a> </li><li> <a href="/gallery" class="nav-drawer__link"> <span> <strong>Gallery</strong> <small>Finished Artefkt output</small> </span> <svg width="15" height="15" viewBox="0 0 256 256" fill="none" stroke="currentColor" stroke-width="20" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M40 128h176"/><path d="m144 56 72 72-72 72"/></svg> </a> </li> <li> <a href="/docs" class="nav-drawer__link"> <span> <strong>Docs</strong> <small>Setup, shortcuts and files</small> </span> <svg width="15" height="15" viewBox="0 0 256 256" fill="none" stroke="currentColor" stroke-width="20" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M40 128h176"/><path d="m144 56 72 72-72 72"/></svg> </a> </li> </ul> </div> </header> <script>
+  const header = document.querySelector('.nav-fixed');
+
+  (() => {
+    const onScroll = () => {
+      header?.classList.toggle('is-scrolled', window.scrollY > 10);
+    };
+    window.addEventListener('scroll', onScroll, { passive: true });
+    onScroll();
+  })();
+
+  (() => {
+    const btn = document.getElementById('nav-hamburger');
+    const drawer = document.getElementById('mobile-drawer');
+    if (!btn || !drawer) return;
+    const close = () => {
+      btn.setAttribute('aria-expanded', 'false');
+      btn.classList.remove('is-open');
+      header?.classList.remove('is-menu-open');
+      drawer.hidden = true;
+      document.body.style.overflow = '';
+    };
+    const open = () => {
+      btn.setAttribute('aria-expanded', 'true');
+      btn.classList.add('is-open');
+      header?.classList.add('is-menu-open');
+      drawer.hidden = false;
+      // next frame so transition can play
+      requestAnimationFrame(() => drawer.classList.add('is-open'));
+    };
+    btn.addEventListener('click', () => {
+      if (btn.getAttribute('aria-expanded') === 'true') {
+        drawer.classList.remove('is-open');
+        setTimeout(close, 180);
+      } else {
+        open();
+      }
+    });
+    drawer.querySelectorAll('a').forEach((a) => a.addEventListener('click', () => {
+      drawer.classList.remove('is-open');
+      setTimeout(close, 180);
+    }));
+  })();
+</script> <div class="grain min-h-screen pt-[68px]"> <main class="docs-page mx-auto max-w-[1560px] px-6 pb-20 pt-14 lg:px-12 lg:pt-18"> <header class="reveal max-w-[900px]"> <p class="docs-eyebrow">Documentation</p> <h1 class="display-h1 mt-5 text-[clamp(56px,8vw,132px)] text-white">
+Artefkt docs.
+</h1> <p class="mt-6 max-w-[720px] text-[18px] leading-8 text-white/62 md:text-[20px]">
+A practical reference for opening images, building stacks, exporting work and keeping your local setup portable.
+</p> </header> <div class="docs-shell mt-10 grid gap-10 lg:grid-cols-[280px_minmax(0,1fr)]"> <aside class="docs-toc lg:sticky lg:top-24 lg:self-start" aria-label="Docs contents"> <nav class="rounded-xl border border-[var(--hairline)] bg-black/[0.08] p-3" data-docs-toc> <a href="#quickstart" class="docs-toc-link">Quickstart</a><a href="#workspace" class="docs-toc-link">Workspace</a><a href="#preview-export" class="docs-toc-link">Preview and export</a><a href="#files" class="docs-toc-link">Files</a><a href="#storage-locations" class="docs-toc-link">Storage and locations</a><a href="#effects" class="docs-toc-link">Effects and presets</a><a href="#settings" class="docs-toc-link">Settings</a><a href="#requirements" class="docs-toc-link">Requirements</a><a href="#troubleshooting" class="docs-toc-link">Troubleshooting</a><a href="#shortcuts" class="docs-toc-link">Shortcuts</a><a href="#faq" class="docs-toc-link">FAQ</a> </nav> </aside> <article class="docs-content"> <section id="quickstart" class="docs-section"> <div class="docs-section-head"> <div class="docs-section-title"> <h2>Quickstart</h2> </div> <p>The shortest path from source image to exported file.</p> </div> <div class="docs-step-list"> <div class="docs-step"> <span class="docs-step-marker" aria-label="Step 1"> <span class="docs-step-pixels" aria-hidden="true"> <span class="docs-step-pixel is-active"></span><span class="docs-step-pixel"></span><span class="docs-step-pixel"></span><span class="docs-step-pixel"></span><span class="docs-step-pixel"></span> </span> </span> <div> <h3>Open a source image</h3> <p>Use File &gt; Open Image, the empty canvas button, or drag an image onto the canvas. Artefkt accepts PNG, JPEG, WebP, HEIC and HEIF source images.</p> </div> </div><div class="docs-step"> <span class="docs-step-marker" aria-label="Step 2"> <span class="docs-step-pixels" aria-hidden="true"> <span class="docs-step-pixel is-active"></span><span class="docs-step-pixel is-active"></span><span class="docs-step-pixel"></span><span class="docs-step-pixel"></span><span class="docs-step-pixel"></span> </span> </span> <div> <h3>Add effects</h3> <p>Search or browse the Effect Library. Double-click an effect, or press its add button, to place it into the stack.</p> </div> </div><div class="docs-step"> <span class="docs-step-marker" aria-label="Step 3"> <span class="docs-step-pixels" aria-hidden="true"> <span class="docs-step-pixel is-active"></span><span class="docs-step-pixel is-active"></span><span class="docs-step-pixel is-active"></span><span class="docs-step-pixel"></span><span class="docs-step-pixel"></span> </span> </span> <div> <h3>Build the stack</h3> <p>Effects run from top to bottom. Reorder layers, toggle them, duplicate them, adjust opacity, and choose blend modes per layer.</p> </div> </div><div class="docs-step"> <span class="docs-step-marker" aria-label="Step 4"> <span class="docs-step-pixels" aria-hidden="true"> <span class="docs-step-pixel is-active"></span><span class="docs-step-pixel is-active"></span><span class="docs-step-pixel is-active"></span><span class="docs-step-pixel is-active"></span><span class="docs-step-pixel"></span> </span> </span> <div> <h3>Tune and compare</h3> <p>Select a stack layer to edit its parameters. Use seeds, presets, advanced controls and before/after view while the preview updates.</p> </div> </div><div class="docs-step"> <span class="docs-step-marker" aria-label="Step 5"> <span class="docs-step-pixels" aria-hidden="true"> <span class="docs-step-pixel is-active"></span><span class="docs-step-pixel is-active"></span><span class="docs-step-pixel is-active"></span><span class="docs-step-pixel is-active"></span><span class="docs-step-pixel is-active"></span> </span> </span> <div> <h3>Export</h3> <p>Use Export for a save dialog, or Quick Export after setting a destination folder. Export supports PNG, JPEG and WebP.</p> </div> </div> </div> </section> <section id="workspace" class="docs-section"> <div class="docs-section-head"> <div class="docs-section-title"> <h2>Workspace</h2> </div> <p>The app is built around a source image, a preview canvas and an editable stack.</p> </div> <dl class="docs-data"> <div class="docs-data-row"> <dt>  <span>Top bar</span> </dt> <dd>Project actions, view controls, undo/redo, settings, help, Quick Export and Export.</dd> </div><div class="docs-data-row"> <dt>  <span>Effect Library</span> </dt> <dd>Searchable effect list with categories, favorites, recents and add controls.</dd> </div><div class="docs-data-row"> <dt>  <span>Canvas</span> </dt> <dd>Live preview with zoom, pan, fit, actual size and before/after comparison.</dd> </div><div class="docs-data-row"> <dt>  <span>Effect Stack</span> </dt> <dd>Ordered layer stack with visibility, opacity, blend mode, duplicate, remove and preset controls.</dd> </div><div class="docs-data-row"> <dt>  <span>Params pane</span> </dt> <dd>Controls for the selected effect. It can live in the right pane or in the optional bottom Device Strip.</dd> </div><div class="docs-data-row"> <dt>  <span>Status bar</span> </dt> <dd>Preview size, render timing, zoom, export mode and progress feedback.</dd> </div><div class="docs-data-row"> <dt>  <span>Auto-Reveal Focus Mode</span> </dt> <dd>Hides enabled side panels and the Device Strip while leaving the canvas visible. Hover the left, right or bottom edge to temporarily reveal its panel.</dd> </div> </dl> <div class="docs-callout"> <h3>Focus Canvas vs Auto-Reveal Focus Mode</h3> <p>
+Focus Canvas hides panels until you restore them manually. Auto-Reveal Focus Mode keeps the canvas clear while temporarily revealing enabled panels when your pointer reaches an edge; leave the panel and it hides again.
+</p> </div> </section> <section id="preview-export" class="docs-section"> <div class="docs-section-head"> <div class="docs-section-title"> <h2>Preview and export</h2> </div> <p>Preview is optimized for editing speed. Export is where the final render happens.</p> </div> <div class="docs-callout"> <h3>Preview is not the source file</h3> <p>
+By default, Artefkt builds a downscaled preview so parameter changes stay responsive. The app can still export from the source image size by rerunning the same stack during export.
+</p> </div> <div class="docs-grid-two"> <div> <h3>Preview mode</h3> <p>
+Preview uses a configurable long-edge cap, resampling mode and optional source-resolution mode. Source-resolution preview is useful for checking detail, but it is heavier.
+</p> </div> <div> <h3>Export mode</h3> <p>
+Export can use source resolution for full-size output, or preview resolution when you want the current preview dimensions. The status bar shows the active export mode.
+</p> </div> </div> </section> <section id="files" class="docs-section"> <div class="docs-section-head"> <div class="docs-section-title"> <h2>Files</h2> </div> <p>Artefkt keeps source files, projects, exports and app data separate.</p> </div> <dl class="docs-data"> <div class="docs-data-row"> <dt>  <span>Source images</span> </dt> <dd>PNG, JPEG, WebP, HEIC and HEIF. Up to 100 MB, 48 MP, or 12000 px on either side.</dd> </div><div class="docs-data-row"> <dt>  <span>Exports</span> </dt> <dd>PNG, JPEG and WebP. JPEG quality is controlled in Settings.</dd> </div><div class="docs-data-row"> <dt>  <span>Projects</span> </dt> <dd>.glitch files save the stack, export options and source image path. They do not embed the source image.</dd> </div><div class="docs-data-row"> <dt>  <span>User data</span> </dt> <dd>.artefkt files can export/import custom themes, stack presets, effect presets, app settings and library data.</dd> </div><div class="docs-data-row"> <dt>  <span>Palettes</span> </dt> <dd>.hex, .png and .ase palette files. Imported palettes are deduplicated and capped at 256 colors.</dd> </div> </dl> <div class="docs-callout"> <h3>Project files are recipes</h3> <p>
+A <code>.glitch</code> project stores the stack and the source image path. It does not include the original image bytes, so keep the source image beside your project or relink it if it moves.
+</p> </div> </section> <section id="storage-locations" class="docs-section"> <div class="docs-section-head"> <div class="docs-section-title"> <h2>Storage and locations</h2> </div> <p>Where the Windows application is installed, what it stores automatically, and what remains under your control.</p> </div> <dl class="docs-data"> <div class="docs-data-row"> <dt> <span class="docs-data-icon" aria-hidden="true"> <svg class="" width="19" height="19" viewBox="0 0 256 256" fill="none" stroke="currentColor" stroke-width="13.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="32" y="48" width="192" height="136" rx="16"/><path d="M88 224h80"/><path d="M128 184v40"/></svg> </span> <span>Installed application</span> </dt> <dd>The Windows installer currently places Artefkt at %LOCALAPPDATA%\Artefkt\, including artefkt.exe and uninstall.exe.</dd> </div><div class="docs-data-row"> <dt> <span class="docs-data-icon" aria-hidden="true"> <svg class="" width="19" height="19" viewBox="0 0 256 256" fill="none" stroke="currentColor" stroke-width="13.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><ellipse cx="128" cy="56" rx="88" ry="32"/><path d="M40 56v144c0 17.7 39.4 32 88 32s88-14.3 88-32V56"/><path d="M40 128c0 17.7 39.4 32 88 32s88-14.3 88-32"/></svg> </span> <span>Application storage</span> </dt> <dd>%LOCALAPPDATA%\net.zombot.artefkt\EBWebView\ contains WebView-managed settings, themes, presets, library preferences and runtime/cache data.</dd> </div><div class="docs-data-row"> <dt> <span class="docs-data-icon" aria-hidden="true"> <svg class="" width="19" height="19" viewBox="0 0 256 256" fill="none" stroke="currentColor" stroke-width="13.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M24 80a16 16 0 0 1 16-16h64l24 32h88a16 16 0 0 1 16 16v80a16 16 0 0 1-16 16H40a16 16 0 0 1-16-16Z"/></svg> </span> <span>Projects and exports</span> </dt> <dd>Source images, exported artwork and .glitch project files stay in the locations you select when opening or saving files.</dd> </div><div class="docs-data-row"> <dt> <span class="docs-data-icon" aria-hidden="true"> <svg class="" width="19" height="19" viewBox="0 0 256 256" fill="none" stroke="currentColor" stroke-width="13.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M128 32v128"/><path d="m80 112 48 48 48-48"/><path d="M48 216h160"/></svg> </span> <span>Quick Export output</span> </dt> <dd>Quick Export writes to the destination folder configured in Settings.</dd> </div><div class="docs-data-row"> <dt> <span class="docs-data-icon" aria-hidden="true"> <svg class="" width="19" height="19" viewBox="0 0 256 256" fill="none" stroke="currentColor" stroke-width="13.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M48 224V32h104l56 56v136Z"/><path d="M152 32v56h56"/></svg> </span> <span>Backups and transfers</span> </dt> <dd>.artefkt user-data backups are written wherever you choose during export.</dd> </div> </dl> <div class="docs-grid-two"> <div> <h3>Back up before resetting</h3> <p>
+Export an <code>.artefkt</code> user-data file before clearing application storage if you want to keep settings, themes or presets. Keep each <code>.glitch</code> project with its original source image because projects reference an image path rather than embedding the image.
+</p> </div> <div> <h3>Uninstalling and local data</h3> <p>
+Uninstalling removes the installed application. Your saved images, exports, projects and backups remain in the locations you chose. For a complete reset, remaining WebView application storage may need to be removed separately.
+</p> </div> </div> </section> <section id="effects" class="docs-section"> <div class="docs-section-head"> <div class="docs-section-title"> <h2>Effects and presets</h2> </div> <p>The current app ships with 65 effects across six categories.</p> </div> <dl class="docs-data"> <div class="docs-data-row" style="--docs-row-accent: #e07855"> <dt> <span class="docs-data-icon" aria-hidden="true"> <svg class="" width="19" height="19" viewBox="0 0 256 256" fill="none" stroke="currentColor" stroke-width="13.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M128 24a104 104 0 0 0 0 208h20a20 20 0 0 0 14.1-34.1l-5.6-5.6A28 28 0 0 1 176.3 144H192a40 40 0 0 0 40-40c0-44.2-46.6-80-104-80Z"/><circle cx="88" cy="104" r="12"/><circle cx="120" cy="72" r="12"/><circle cx="168" cy="80" r="12"/><circle cx="184" cy="120" r="12"/></svg> </span> <span>Color</span> </dt> <dd>Brightness, contrast, curves-style passes, channel tools and other color operations.</dd> </div><div class="docs-data-row" style="--docs-row-accent: #d4a843"> <dt> <span class="docs-data-icon" aria-hidden="true"> <svg class="" width="19" height="19" viewBox="0 0 256 256" fill="none" stroke="currentColor" stroke-width="13.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m128 32 96 56-96 56-96-56 96-56Z"/><path d="m32 136 96 56 96-56"/><path d="m32 184 96 56 96-56"/></svg> </span> <span>Palette</span> </dt> <dd>Palette map, palette cycle, indexed color drift and heatmap-style mapping.</dd> </div><div class="docs-data-row" style="--docs-row-accent: #5db85d"> <dt> <span class="docs-data-icon" aria-hidden="true"> <svg class="" width="19" height="19" viewBox="0 0 256 256" fill="none" stroke="currentColor" stroke-width="13.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M56 96h152"/><path d="M48 160h152"/><path d="M104 40 80 216"/><path d="M176 40l-24 176"/></svg> </span> <span>Dither</span> </dt> <dd>Bayer, Atkinson, blue-noise, ordered pattern and error-diffusion style dithers.</dd> </div><div class="docs-data-row" style="--docs-row-accent: #4fc3f7"> <dt> <span class="docs-data-icon" aria-hidden="true"> <svg class="" width="19" height="19" viewBox="0 0 256 256" fill="none" stroke="currentColor" stroke-width="13.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="40" y="40" width="72" height="72" rx="8"/><rect x="144" y="40" width="72" height="72" rx="8"/><rect x="40" y="144" width="72" height="72" rx="8"/><rect x="144" y="144" width="72" height="72" rx="8"/></svg> </span> <span>Pixel</span> </dt> <dd>Pixelation, resize, mosaic, fisheye, slice and related pixel transforms.</dd> </div><div class="docs-data-row" style="--docs-row-accent: #e05090"> <dt> <span class="docs-data-icon" aria-hidden="true"> <svg class="" width="19" height="19" viewBox="0 0 256 256" fill="none" stroke="currentColor" stroke-width="13.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M152 16 40 144h96l-32 96 112-128h-96l32-96Z"/></svg> </span> <span>Glitch</span> </dt> <dd>Databending, RGB split, block shifts, sync-style slips, sorting and corruption tools.</dd> </div><div class="docs-data-row" style="--docs-row-accent: #9b7fd4"> <dt> <span class="docs-data-icon" aria-hidden="true"> <svg class="" width="19" height="19" viewBox="0 0 256 256" fill="none" stroke="currentColor" stroke-width="13.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="32" y="64" width="192" height="128" rx="16"/><path d="M88 224h80"/><path d="M128 192v32"/><path d="m88 24 40 40 40-40"/></svg> </span> <span>Display</span> </dt> <dd>CRT, ASCII, hardware limits, halftone, scanlines and display-system treatments.</dd> </div> </dl> <div class="docs-grid-two"> <div> <h3>Stack presets</h3> <p>Save a whole effect stack as a reusable look. Stack presets can be applied later and can also be shared as stack strings.</p> </div> <div> <h3>Effect presets</h3> <p>Save settings for a single effect. Effects can also include built-in presets, seed controls and advanced parameters.</p> </div> </div> </section> <section id="settings" class="docs-section"> <div class="docs-section-head"> <div class="docs-section-title"> <h2>Settings</h2> </div> <p>Settings are saved on the device unless you export them as user data.</p> </div> <dl class="docs-data"> <div class="docs-data-row"> <dt>  <span>Quick Export</span> </dt> <dd>Choose a folder, filename pattern, overwrite behavior and output format. Filename patterns support {name} and {timestamp}.</dd> </div><div class="docs-data-row"> <dt>  <span>Preview</span> </dt> <dd>Adjust preview cap, source-resolution preview and resampling. Lower preview settings keep heavy stacks responsive.</dd> </div><div class="docs-data-row"> <dt>  <span>Export resolution</span> </dt> <dd>Use source resolution for full-size output, or preview resolution when you want the current preview size.</dd> </div><div class="docs-data-row"> <dt>  <span>Layout</span> </dt> <dd>Choose right-pane or bottom-strip parameters, insertion behavior, visible panels, Focus Canvas and Auto-Reveal Focus Mode.</dd> </div><div class="docs-data-row"> <dt>  <span>Appearance</span> </dt> <dd>Use built-in themes, create custom themes, adjust GUI scale, choose UI fonts and control checker opacity.</dd> </div><div class="docs-data-row"> <dt>  <span>Accessibility</span> </dt> <dd>Reduced motion, boosted secondary text, high contrast options and category color modes.</dd> </div><div class="docs-data-row"> <dt>  <span>Data</span> </dt> <dd>Export or import local settings, themes and presets as an .artefkt file.</dd> </div> </dl> </section> <section id="requirements" class="docs-section"> <div class="docs-section-head"> <div class="docs-section-title"> <h2>Requirements</h2> </div> <p>The current release is built for Windows desktops.</p> </div> <div class="docs-grid-two"> <div> <h3>System</h3> <p>Windows 10/11, 64-bit. Source images can be PNG, JPEG, WebP, HEIC or HEIF, and must fit the app limits: 100 MB, 48 MP, and 12000 px on either side.</p> </div> <div> <h3>Runtime</h3> <p>Artefkt runs locally after installation. Editing and exporting do not require an account check or a constant internet connection.</p> </div> </div> <div class="docs-callout"> <h3>Installer security notice</h3> <p>
+Artefkt is currently distributed without a Windows code-signing certificate, so Windows SmartScreen may show an <strong>Unknown publisher</strong> warning when you launch the installer. Download the installer only from the official purchase/download page. To proceed through SmartScreen, select <strong>More info</strong> and then <strong>Run anyway</strong>.
+</p> <p>
+The download includes a SHA-256 checksum. In PowerShell, run <code>Get-FileHash ".\Artefkt-Setup-1.0.0-x64.exe" -Algorithm SHA256</code> and compare the result with the supplied checksum before installing.
+</p> </div> </section> <section id="troubleshooting" class="docs-section"> <div class="docs-section-head"> <div class="docs-section-title"> <h2>Troubleshooting</h2> </div> <p>Most problems come from moved source files, heavy preview settings or unsupported file formats.</p> </div> <dl class="docs-data"> <div class="docs-data-row"> <dt>  <span>A project opens without its image</span> </dt> <dd>The .glitch file stores the source image path, not the image bytes. If the image moved or was deleted, choose a PNG, JPEG, WebP, HEIC or HEIF replacement image when prompted.</dd> </div><div class="docs-data-row"> <dt>  <span>A drag-dropped image does not relink later</span> </dt> <dd>Some drag/drop paths are unavailable to the app. Save the original image somewhere stable and relink it if needed.</dd> </div><div class="docs-data-row"> <dt>  <span>Preview feels slow</span> </dt> <dd>Lower the preview cap, turn off source-resolution preview, hide effect thumbnails, or reduce very heavy stacks while editing.</dd> </div><div class="docs-data-row"> <dt>  <span>Panels flicker or repaint incorrectly</span> </dt> <dd>Open Settings &gt; Accessibility and enable Safe Graphics Mode. It reduces WebView rendering effects for Windows scaling, WebView2, or GPU-related UI glitches.</dd> </div><div class="docs-data-row"> <dt>  <span>Export differs from the preview size</span> </dt> <dd>By default, export can rerun the stack on the source image. Switch export resolution to preview if you want preview-sized output.</dd> </div><div class="docs-data-row"> <dt>  <span>Quick Export opens the normal dialog</span> </dt> <dd>Quick Export falls back until a destination folder is configured in Settings.</dd> </div><div class="docs-data-row"> <dt>  <span>Palette import fails</span> </dt> <dd>Check that the file is .hex, .png or .ase. Palette PNG files have their own size limit, and ASE import reads RGB color blocks.</dd> </div><div class="docs-data-row"> <dt>  <span>I want to reset Artefkt completely</span> </dt> <dd>Export user data first if needed, uninstall Artefkt, then remove remaining application storage under %LOCALAPPDATA%\net.zombot.artefkt\ only when you intend to start clean. Reinstall afterward.</dd> </div> </dl> </section> <section id="shortcuts" class="docs-section"> <div class="docs-section-head"> <div class="docs-section-title"> <h2>Shortcuts</h2> </div> <p>The app also includes this list under Help &gt; Shortcuts.</p> </div> <div class="docs-shortcut-grid"> <section class="docs-shortcut-card" aria-label="Project shortcuts"> <h3>Project</h3> <div class="docs-shortcuts"> <div> <span> New project  </span> <span class="docs-key-chord" aria-label="Ctrl + N"> <kbd>Ctrl</kbd><kbd>N</kbd> </span> </div><div> <span> Open image  </span> <span class="docs-key-chord" aria-label="Ctrl + O"> <kbd>Ctrl</kbd><kbd>O</kbd> </span> </div><div> <span> Save project  </span> <span class="docs-key-chord" aria-label="Ctrl + S"> <kbd>Ctrl</kbd><kbd>S</kbd> </span> </div><div> <span> Export  </span> <span class="docs-key-chord" aria-label="Ctrl + E"> <kbd>Ctrl</kbd><kbd>E</kbd> </span> </div><div> <span> Quick Export  </span> <span class="docs-key-chord" aria-label="Ctrl + Shift + E"> <kbd>Ctrl</kbd><kbd>Shift</kbd><kbd>E</kbd> </span> </div> </div> </section><section class="docs-shortcut-card" aria-label="History shortcuts"> <h3>History</h3> <div class="docs-shortcuts"> <div> <span> Undo  </span> <span class="docs-key-chord" aria-label="Ctrl + Z"> <kbd>Ctrl</kbd><kbd>Z</kbd> </span> </div><div> <span> Redo  </span> <span class="docs-key-chord" aria-label="Ctrl + Y"> <kbd>Ctrl</kbd><kbd>Y</kbd> </span> </div><div> <span> Redo  </span> <span class="docs-key-chord" aria-label="Ctrl + Shift + Z"> <kbd>Ctrl</kbd><kbd>Shift</kbd><kbd>Z</kbd> </span> </div> </div> </section><section class="docs-shortcut-card" aria-label="Canvas shortcuts"> <h3>Canvas</h3> <div class="docs-shortcuts"> <div> <span> Toggle before/after  </span> <span class="docs-key-chord" aria-label="Q"> <kbd>Q</kbd> </span> </div><div> <span> Zoom in  </span> <span class="docs-key-chord" aria-label="+"> <kbd>+</kbd> </span> </div><div> <span> Zoom out  </span> <span class="docs-key-chord" aria-label="-"> <kbd>-</kbd> </span> </div><div> <span> Reset view  </span> <span class="docs-key-chord" aria-label="0"> <kbd>0</kbd> </span> </div><div> <span> Zoom canvas  </span> <span class="docs-key-chord" aria-label="Mouse Wheel"> <kbd>Mouse Wheel</kbd> </span> </div><div> <span> Pan canvas  </span> <span class="docs-key-chord" aria-label="Middle Drag"> <kbd>Middle Drag</kbd> </span> </div><div> <span> Pan canvas  </span> <span class="docs-key-chord" aria-label="Alt + Drag"> <kbd>Alt</kbd><kbd>Drag</kbd> </span> </div><div> <span> Adjust before/after split  </span> <span class="docs-key-chord" aria-label="Drag Divider"> <kbd>Drag Divider</kbd> </span> </div><div> <span> Load image  </span> <span class="docs-key-chord" aria-label="Drop Image"> <kbd>Drop Image</kbd> </span> </div> </div> </section><section class="docs-shortcut-card" aria-label="Interface shortcuts"> <h3>Interface</h3> <div class="docs-shortcuts"> <div> <span> Increase GUI scale  </span> <span class="docs-key-chord" aria-label="Ctrl + Shift + +"> <kbd>Ctrl</kbd><kbd>Shift</kbd><kbd>+</kbd> </span> </div><div> <span> Decrease GUI scale  </span> <span class="docs-key-chord" aria-label="Ctrl + Shift + -"> <kbd>Ctrl</kbd><kbd>Shift</kbd><kbd>-</kbd> </span> </div><div> <span> Reset GUI scale  </span> <span class="docs-key-chord" aria-label="Ctrl + Shift + 0"> <kbd>Ctrl</kbd><kbd>Shift</kbd><kbd>0</kbd> </span> </div><div> <span> Toggle fullscreen  </span> <span class="docs-key-chord" aria-label="F11"> <kbd>F11</kbd> </span> </div><div> <span> Toggle auto-reveal focus mode <small>from the canvas surface</small> </span> <span class="docs-key-chord" aria-label="Tab"> <kbd>Tab</kbd> </span> </div><div> <span> Close modal or popup  </span> <span class="docs-key-chord" aria-label="Esc"> <kbd>Esc</kbd> </span> </div><div> <span> Move app window  </span> <span class="docs-key-chord" aria-label="Drag Top Bar"> <kbd>Drag Top Bar</kbd> </span> </div><div> <span> Resize side panels  </span> <span class="docs-key-chord" aria-label="Drag Divider"> <kbd>Drag Divider</kbd> </span> </div><div> <span> Resize bottom strip <small>bottom-strip layout</small> </span> <span class="docs-key-chord" aria-label="Drag Divider"> <kbd>Drag Divider</kbd> </span> </div><div> <span> Move Theme Editor  </span> <span class="docs-key-chord" aria-label="Drag Titlebar"> <kbd>Drag Titlebar</kbd> </span> </div> </div> </section><section class="docs-shortcut-card" aria-label="Effect Library shortcuts"> <h3>Effect Library</h3> <div class="docs-shortcuts"> <div> <span> Add effect to stack  </span> <span class="docs-key-chord" aria-label="Double-click + Effect"> <kbd>Double-click</kbd><kbd>Effect</kbd> </span> </div> </div> </section><section class="docs-shortcut-card" aria-label="Effect Stack shortcuts"> <h3>Effect Stack</h3> <div class="docs-shortcuts"> <div> <span> Reorder effect layer  </span> <span class="docs-key-chord" aria-label="Drag Handle"> <kbd>Drag Handle</kbd> </span> </div><div> <span> Reset parameter to default  </span> <span class="docs-key-chord" aria-label="Double-click + Slider"> <kbd>Double-click</kbd><kbd>Slider</kbd> </span> </div><div> <span> Reset layer opacity  </span> <span class="docs-key-chord" aria-label="Double-click + Opacity Slider"> <kbd>Double-click</kbd><kbd>Opacity Slider</kbd> </span> </div><div> <span> Cycle layer blend mode  </span> <span class="docs-key-chord" aria-label="Wheel + Blend Menu"> <kbd>Wheel</kbd><kbd>Blend Menu</kbd> </span> </div><div> <span> Resize parameter pane  </span> <span class="docs-key-chord" aria-label="Drag Divider"> <kbd>Drag Divider</kbd> </span> </div> </div> </section><section class="docs-shortcut-card" aria-label="Bottom Strip shortcuts"> <h3>Bottom Strip</h3> <div class="docs-shortcuts"> <div> <span> Reorder effect card  </span> <span class="docs-key-chord" aria-label="Drag Header"> <kbd>Drag Header</kbd> </span> </div><div> <span> Reset parameter to default  </span> <span class="docs-key-chord" aria-label="Double-click + Slider"> <kbd>Double-click</kbd><kbd>Slider</kbd> </span> </div><div> <span> Resize effect card  </span> <span class="docs-key-chord" aria-label="Drag Right Edge"> <kbd>Drag Right Edge</kbd> </span> </div><div> <span> Reset effect card width  </span> <span class="docs-key-chord" aria-label="Double-click + Right Edge"> <kbd>Double-click</kbd><kbd>Right Edge</kbd> </span> </div><div> <span> Scroll effect parameters <small>over a card body</small> </span> <span class="docs-key-chord" aria-label="Wheel"> <kbd>Wheel</kbd> </span> </div><div> <span> Scroll effect strip <small>over a card header</small> </span> <span class="docs-key-chord" aria-label="Wheel"> <kbd>Wheel</kbd> </span> </div><div> <span> Scroll effect strip anywhere  </span> <span class="docs-key-chord" aria-label="Shift + Wheel"> <kbd>Shift</kbd><kbd>Wheel</kbd> </span> </div> </div> </section> </div> </section> <section id="faq" class="docs-section"> <div class="docs-section-head"> <div class="docs-section-title"> <h2>FAQ</h2> </div> <p>Short answers for purchase, local files and sharing.</p> </div> <div class="docs-faq"> <details> <summary>Is Artefkt a subscription?</summary> <p>No. The current plan is a one-time $5 purchase.</p> </details><details> <summary>Does it need an account?</summary> <p>No account check is part of the local editing workflow.</p> </details><details> <summary>Does it need the internet to edit?</summary> <p>No. Editing, preview and export work locally after installation.</p> </details><details> <summary>Does it upload my images?</summary> <p>Artefkt works on local files. Images and projects stay local unless you export, import or share them yourself.</p> </details><details> <summary>Does a project include my source image?</summary> <p>No. A .glitch project stores the stack and the source image path. Keep the original image if you want the project to reopen with it.</p> </details><details> <summary>Can I share looks?</summary> <p>Yes. Use stack presets, shared stack strings, effect presets, custom themes or .artefkt data export depending on what you want to move.</p> </details><details> <summary>Can people copy the app?</summary> <p>Artefkt is sold without DRM. Buying it supports future updates, but the app is not built around account locks and licenses.</p> </details><details> <summary>Is Mac or Linux supported?</summary> <p>Not in the current Windows release, BUT IT IS A PRIORITY! :)</p> </details> </div> </section> </article> </div> </main> <footer class="relative content-auto pb-8"> <div class="mx-auto max-w-[1560px] px-6 lg:px-12"> <div class="reveal rounded-[18px] border border-[var(--hairline)] bg-black/[0.08] shadow-[0_1px_0_rgba(255,255,255,0.035)_inset]"> <div class="grid gap-8 px-6 py-7 md:grid-cols-[1.2fr_2fr] lg:px-8"> <div> <div class="flex items-center gap-3"> <img src="/logo1.svg" alt="" class="h-8 w-8" width="32" height="32" aria-hidden="true"> <img src="/artefkt-logo.svg" alt="Artefkt" class="h-6 w-auto" width="138" height="30"> </div> <p class="mt-5 max-w-[34ch] text-[14px] leading-6 text-white/50">
+A local-first desktop editor for building destructive-looking image stacks without giving up your source files.
+</p> </div> <nav aria-label="Footer" class="grid grid-cols-2 gap-8 sm:grid-cols-3"> <div> <h2 class="text-[14px] font-semibold text-white">Product</h2> <ul class="mt-4 space-y-2.5"> <li> <a href="/#features" class="text-[14px] text-white/58 transition-colors hover:text-white"> Features </a> </li><li> <a href="/effects" class="text-[14px] text-white/58 transition-colors hover:text-white"> Effects library </a> </li><li> <a href="/gallery" class="text-[14px] text-white/58 transition-colors hover:text-white"> Gallery </a> </li> </ul> </div><div> <h2 class="text-[14px] font-semibold text-white">Resources</h2> <ul class="mt-4 space-y-2.5"> <li> <a href="/docs" class="text-[14px] text-white/58 transition-colors hover:text-white"> Docs </a> </li><li> <a href="/docs#quickstart" class="text-[14px] text-white/58 transition-colors hover:text-white"> Quickstart </a> </li><li> <a href="/docs#shortcuts" class="text-[14px] text-white/58 transition-colors hover:text-white"> Shortcuts </a> </li><li> <a href="https://discord.gg/hAUXFpTYRp" class="text-[14px] text-white/58 transition-colors hover:text-white" target="_blank" rel="noreferrer"> Discord </a> </li> </ul> </div><div> <h2 class="text-[14px] font-semibold text-white">Download</h2> <ul class="mt-4 space-y-2.5"> <li> <a href="https://z0mb0t.itch.io/artefkt" class="text-[14px] text-white/58 transition-colors hover:text-white" target="_blank" rel="noreferrer"> Purchase </a> </li><li> <a href="/docs#requirements" class="text-[14px] text-white/58 transition-colors hover:text-white"> Requirements </a> </li><li> <a href="/docs#troubleshooting" class="text-[14px] text-white/58 transition-colors hover:text-white"> Install notes </a> </li> </ul> </div> </nav> </div> <div class="flex flex-col gap-2 border-t border-[var(--hairline)] px-6 py-4 text-[12px] text-white/34 sm:flex-row sm:items-center sm:justify-between lg:px-8"> <p>© 2026 Artefkt.</p> <div class="flex flex-col gap-2 sm:flex-row sm:items-center sm:gap-4"> <p>
+Made with <span class="text-[var(--violet-soft)]">💜</span> by  <a href="https://zombot.net" class="transition-colors hover:text-white/62" target="_blank" rel="noreferrer">zombot</a> </p> <a href="mailto:hello@artefkt.dev" class="transition-colors hover:text-white/62">hello@artefkt.dev</a> <a href="https://discord.gg/hAUXFpTYRp" class="inline-flex items-center gap-1.5 transition-colors hover:text-white/62" target="_blank" rel="noreferrer" aria-label="Join the Artefkt Discord"> <svg class="h-3.5 w-3.5" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"> <path d="M19.54 5.28A16.7 16.7 0 0 0 15.39 4c-.18.33-.39.77-.53 1.12a15.47 15.47 0 0 0-4.72 0A9.2 9.2 0 0 0 9.6 4a16.75 16.75 0 0 0-4.15 1.28C2.82 9.18 2.1 12.98 2.46 16.72a16.8 16.8 0 0 0 5.09 2.58c.41-.56.78-1.15 1.09-1.78-.6-.23-1.17-.51-1.71-.84.14-.1.28-.21.42-.32a11.95 11.95 0 0 0 10.3 0l.42.32c-.54.33-1.12.61-1.72.84.32.63.68 1.22 1.09 1.78a16.75 16.75 0 0 0 5.1-2.58c.43-4.34-.73-8.1-3-11.44ZM9.23 14.4c-.99 0-1.8-.91-1.8-2.02s.8-2.02 1.8-2.02c1.01 0 1.82.91 1.8 2.02 0 1.11-.8 2.02-1.8 2.02Zm5.54 0c-.99 0-1.8-.91-1.8-2.02s.8-2.02 1.8-2.02c1.01 0 1.82.91 1.8 2.02 0 1.11-.8 2.02-1.8 2.02Z"></path> </svg>
+Discord
+</a> </div> </div> </div> </div> </footer> </div>  </div> <script>
+      (() => {
+        const root = document.documentElement;
+        const finish = () => {
+          root.classList.remove('is-loading');
+          root.classList.add('is-ready');
+        };
+
+        const ready = new Promise((resolve) => {
+          if (document.readyState !== 'loading') {
+            resolve();
+            return;
+          }
+          document.addEventListener('DOMContentLoaded', resolve, { once: true });
+        });
+
+        const fonts = document.fonts?.ready?.catch?.(() => {}) ?? Promise.resolve();
+        const timeout = new Promise((resolve) => window.setTimeout(resolve, 1000));
+
+        Promise.race([
+          Promise.all([ready, fonts]),
+          timeout,
+        ]).then(() => {
+          window.setTimeout(finish, 120);
+        });
+      })();
+    </script> <script>
+      (() => {
+        const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+        if (reduceMotion) {
+          document.querySelectorAll('video[data-motion-video]').forEach((video) => {
+            video.pause();
+            video.removeAttribute('autoplay');
+          });
+        }
+
+        const revealEls = Array.from(document.querySelectorAll('.reveal'));
+        if (revealEls.length) {
+          if (reduceMotion || !('IntersectionObserver' in window)) {
+            revealEls.forEach((el) => el.classList.add('is-visible'));
+          } else {
+            const revealObserver = new IntersectionObserver((entries, observer) => {
+              entries.forEach((entry) => {
+                if (!entry.isIntersecting) return;
+                entry.target.classList.add('is-visible');
+                observer.unobserve(entry.target);
+              });
+            }, { rootMargin: '0px 0px -12% 0px', threshold: 0.12 });
+
+            revealEls.forEach((el) => revealObserver.observe(el));
+          }
+        }
+
+        if (reduceMotion) return;
+
+        const observedVideos = new WeakSet();
+
+        const loadVideo = (video) => {
+          if (video.dataset.loaded === 'true') return;
+          video.src = video.dataset.src;
+          video.dataset.loaded = 'true';
+          video.load();
+        };
+
+        const videoObserver = 'IntersectionObserver' in window
+          ? new IntersectionObserver((entries) => {
+          entries.forEach((entry) => {
+            const video = entry.target;
+            if (entry.isIntersecting) {
+              loadVideo(video);
+              if (!reduceMotion) {
+                video.play().catch(() => {});
+              }
+            } else {
+              video.pause();
+            }
+          });
+        }, { rootMargin: '500px 0px', threshold: 0.01 })
+          : null;
+
+        const observeVideo = (video) => {
+          if (observedVideos.has(video)) return;
+          observedVideos.add(video);
+          if (!videoObserver) {
+            loadVideo(video);
+            return;
+          }
+          videoObserver.observe(video);
+        };
+
+        document
+          .querySelectorAll('video[data-lazy-video][data-src]')
+          .forEach(observeVideo);
+
+        const mutationObserver = new MutationObserver((mutations) => {
+          mutations.forEach((mutation) => {
+            mutation.addedNodes.forEach((node) => {
+              if (!(node instanceof Element)) return;
+              if (node.matches('video[data-lazy-video][data-src]')) {
+                observeVideo(node);
+              }
+              node
+                .querySelectorAll?.('video[data-lazy-video][data-src]')
+                .forEach(observeVideo);
+            });
+          });
+        });
+
+        mutationObserver.observe(document.body, { childList: true, subtree: true });
+      })();
+    </script> </body> </html> <script>
+  (() => {
+    const links = Array.from(document.querySelectorAll('[data-docs-toc] .docs-toc-link'));
+    const sections = links
+      .map((link) => {
+        const id = link.getAttribute('href')?.slice(1);
+        const section = id ? document.getElementById(id) : null;
+        return section ? { id, link, section } : null;
+      })
+      .filter(Boolean);
+
+    if (!sections.length) return;
+
+    const setActive = (id) => {
+      sections.forEach((item) => {
+        const active = item.id === id;
+        item.link.classList.toggle('is-active', active);
+        if (active) {
+          item.link.setAttribute('aria-current', 'true');
+        } else {
+          item.link.removeAttribute('aria-current');
+        }
+      });
+    };
+
+    const pickCurrentSection = () => {
+      const offset = Math.round(window.innerHeight * 0.32);
+      let current = sections[0].id;
+
+      for (const item of sections) {
+        if (item.section.getBoundingClientRect().top <= offset) {
+          current = item.id;
+        }
+      }
+
+      setActive(current);
+    };
+
+    if ('IntersectionObserver' in window) {
+      const observer = new IntersectionObserver(pickCurrentSection, {
+        rootMargin: '-18% 0px -62% 0px',
+        threshold: [0, 0.2, 0.6],
+      });
+
+      sections.forEach((item) => observer.observe(item.section));
+    }
+
+    pickCurrentSection();
+    window.addEventListener('scroll', pickCurrentSection, { passive: true });
+    window.addEventListener('resize', pickCurrentSection);
+  })();
+</script> 
